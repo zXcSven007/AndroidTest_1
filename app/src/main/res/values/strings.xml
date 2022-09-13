@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Android_App</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
+
+    <!-- Second fragment -->
+    <string name="second_fragment_label">UNKNOWN</string>
     <string name="previous">Previous</string>
+    <string name="hello_second_fragment">UNKNOWN</string>
 
+    <!-- First fragment -->
+    <string name="first_fragment_label">Keypad</string>
     <string name="display_prompt_default">Press any button</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
+    <string name="next">Next</string>
     <string name="B1">1</string>
     <string name="B2">2</string>
     <string name="B3">3</string>
