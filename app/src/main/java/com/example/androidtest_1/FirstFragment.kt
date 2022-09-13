@@ -13,10 +13,14 @@ import com.example.androidtest_1.databinding.FragmentFirstBinding
  */
 class FirstFragment : Fragment() {
 
-private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentFirstBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
+
     private val binding get() = _binding!!
+
+    private val enteredNum: Int = -1
+    private val textField: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,10 @@ private var _binding: FragmentFirstBinding? = null
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        binding.bNum0.setOnClickListener {
+            textField + "0"
         }
     }
 

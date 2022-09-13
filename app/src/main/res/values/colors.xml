@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="icon_background">#FFAA00</color>
+    <color name="numeric_buttons_color">#FFFC31</color>
+    <color name="movement_buttons_color">#E94F37</color>
+    <color name="bars_color">#393E41</color>
 </resources>

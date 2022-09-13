@@ -7,6 +7,18 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="display_prompt_default">Press any button</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="B1">1</string>
+    <string name="B2">2</string>
+    <string name="B3">3</string>
+    <string name="B4">4</string>
+    <string name="B5">5</string>
+    <string name="B6">6</string>
+    <string name="B7">7</string>
+    <string name="B8">8</string>
+    <string name="B9">9</string>
+    <string name="B0">0</string>
+    <string name="BClear">C</string>
 </resources>
