@@ -10,7 +10,10 @@
     <!-- First fragment -->
     <string name="first_fragment_label">Keypad</string>
     <string name="display_prompt_default">Press any button</string>
-    <string name="next">Next</string>
+    <string name="ad_interstitial_button">Show interstitial Ad</string>
+    <string name="ad_banner_button">Show banner Ad</string>
+    <string name="ad_rewarded_button">Show rewarded Ad</string>
+    <string name="reward_current_amount">Total reward: %1$s</string>
     <string name="B1">1</string>
     <string name="B2">2</string>
     <string name="B3">3</string>

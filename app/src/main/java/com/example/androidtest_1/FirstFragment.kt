@@ -1,21 +1,20 @@
 package com.example.androidtest_1
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.androidtest_1.databinding.FragmentFirstBinding
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.OnUserEarnedRewardListener
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 
 
 /**
@@ -25,7 +24,10 @@ class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private var mInterstitialAd: InterstitialAd? = null
+    private var mRewardedAd: RewardedAd? = null
     private final var TAG = "FirstFragment"
+
+    private var currentUserReward = 0
     // This property is only valid between onCreateView and
     // onDestroyView.
 
@@ -55,17 +57,50 @@ class FirstFragment : Fragment() {
         binding.displayField.text = currentTextField
     }
 
+    private fun showRewardCurrentAmount() {
+        val rewardString = getString(R.string.reward_current_amount, currentUserReward.toString())
+        binding.rewardField.text = rewardString
+    }
+
+    private fun onUserGetReward() {
+        currentUserReward += 100
+        Log.d(TAG, "User earned the reward.")
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //binding.buttonFirst.setOnClickListener {
         //    findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         //}
 
-        val mAdView : AdView = binding.adView
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        showRewardCurrentAmount()
 
-        binding.buttonNext.setOnClickListener {
+        binding.buttonRewardedAd.setOnClickListener {
+            var adRequest = AdRequest.Builder().build()
+            RewardedAd.load(requireContext(),"ca-app-pub-3940256099942544/5224354917", adRequest, object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG, adError.toString())
+                    mRewardedAd = null
+                }
+
+                override fun onAdLoaded(rewardedAd: RewardedAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    mRewardedAd = rewardedAd
+                }
+            })
+
+            if (mRewardedAd != null) {
+                mRewardedAd?.show(requireActivity(),
+                    OnUserEarnedRewardListener() {
+                        onUserGetReward()
+                        showRewardCurrentAmount()
+                    })
+            } else {
+                Log.d(TAG, "The rewarded ad wasn't ready yet.")
+            }
+        }
+
+        binding.buttonInterstitialAd.setOnClickListener {
             //TODO(show interstitial ads)
             var adRequest = AdRequest.Builder().build()
 
@@ -86,6 +121,13 @@ class FirstFragment : Fragment() {
             } else {
                 Log.d("TAG", "The interstitial ad wasn't ready yet.")
             }
+        }
+
+        binding.buttonBannerAd.setOnClickListener {
+            binding.adView.visibility = View.VISIBLE
+            val mAdView : AdView = binding.adView
+            val adRequest = AdRequest.Builder().build()
+            mAdView.loadAd(adRequest)
         }
 
         binding.bNumC.setOnClickListener {
